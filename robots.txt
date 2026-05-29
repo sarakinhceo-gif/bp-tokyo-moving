@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sarakinhceo-gif.github.io/bp-tokyo-moving//sitemap.xml

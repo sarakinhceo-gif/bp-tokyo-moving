@@ -1,564 +1,184 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공덕 가라오케 추천정보 | 도쿄무빙 — 있는 그대로 까발림</title>
-    <meta name="description" content="공덕 가라오케 진짜 추천할 데가 여기뿐인가? 솔직한 후기와 함께 공덕 가라오케 정보를 다 까발립니다. 가격, 시설, 분위기까지 — 속는 거 싫으면 보세요.">
-    <meta name="keywords" content="공덕 가라오케, 공덕 가라오케 추천, 공덕 노래방, tokyo-moving, pbn, 공덕 가라오케 정보">
-    <link rel="canonical" href="https://tokyo-moving.pages.dev/">
-    <meta name="bpaas-design-system" content="brutalist-avantgarde">
-    <meta name="bpaas-design-theme" content="kr-neon-void">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="공덕 가라오케 추천정보 | 도쿄무빙">
-    <meta property="og:description" content="공덕 가라오케 진짜 추천할 데가 여기뿐인가? 솔직한 후기와 함께 공덕 가라오케 정보를 다 까발립니다. 가격, 시설, 분위기까지 — 속는 거 싫으면 보세요.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tokyo-moving.pages.dev/">
-    <meta property="og:locale" content="ko_KR">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="공덕 가라오케 추천정보 | 도쿄무빙">
-    <meta name="twitter:description" content="공덕 가라오케 진짜 추천할 데가 여기뿐인가? 솔직한 후기와 함께 공덕 가라오케 정보를 다 까발립니다. 가격, 시설, 분위기까지 — 속는 거 싫으면 보세요.">
-
-    <!-- JSON-LD 스키마 (LocalBusiness + Review) -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "도쿄무빙",
-            "description": "공덕 가라오케 그냥저냥 한 번 가볼 만한 곳. 솔직한 후기로 유명해요.",
-            "telephone": "010-6279-0862",
-            "url": "https://tokyo-moving.pages.dev/",
-            "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "서울",
-                "addressRegion": "공덕",
-                "addressCountry": "KR"
-            },
-            "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "3.9",
-                "bestRating": "5",
-                "reviewCount": "12"
-            },
-            "review": [
-                {
-                    "@type": "Review",
-                    "author": {"@type": "Person", "name": "밤샘가오리"},
-                    "datePublished": "2025-03-14",
-                    "reviewBody": "생각보다 괜찮았어요. 근데 가격은 좀 쎄요.",
-                    "reviewRating": {"@type": "Rating", "ratingValue": "4"}
-                },
-                {
-                    "@type": "Review",
-                    "author": {"@type": "Person", "name": "노래방탈출못함"},
-                    "datePublished": "2025-02-28",
-                    "reviewBody": "시설은 깔끔한데 직원이 좀 시크함. 그래도 공덕에서 제일 나은 듯.",
-                    "reviewRating": {"@type": "Rating", "ratingValue": "3"}
-                }
-            ]
-        }
-    </script>
-
-    <style>
-        /* ----- RESET & BASE ----- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #000000;
-            color: #ffffff;
-            font-family: Impact, system-ui, 'Arial Black', sans-serif;
-            line-height: 1.3;
-            font-weight: 400;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: #ffffff;
-            text-decoration: none;
-        }
-        a:hover {
-            color: #ff3b00;
-        }
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* ----- TYPOGRAPHY ----- */
-        h1, h2, h3 {
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            font-size: clamp(3.2rem, 12vw, 7rem);
-            line-height: 0.95;
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            font-size: clamp(2.4rem, 6vw, 4rem);
-            line-height: 1.1;
-            border-left: 6px solid #ff3b00;
-            padding-left: 24px;
-            margin-bottom: 48px;
-            transform: rotate(-1deg);
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            font-family: system-ui, sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            max-width: 70ch;
-        }
-
-        .text-accent {
-            color: #ff3b00;
-        }
-
-        .text-mono {
-            font-family: 'Courier New', Courier, monospace;
-            letter-spacing: 0.05em;
-        }
-
-        /* ----- LAYOUT ----- */
-        header,
-        section,
-        footer {
-            padding: 72px 48px;
-        }
-
-        section {
-            padding: 72px 48px;
-            margin-bottom: 48px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .full-bleed {
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-        }
-
-        /* ----- BRUTAL BORDERS & TEXTURES ----- */
-        .brutal-border {
-            border: 4px solid #ffffff;
-            box-shadow: 8px 8px 0 #ff3b00;
-        }
-
-        .brutal-border-accent {
-            border: 4px solid #ff3b00;
-            box-shadow: 8px 8px 0 #ffffff;
-        }
-
-        .rotate-left {
-            transform: rotate(-2deg);
-        }
-        .rotate-right {
-            transform: rotate(2deg);
-        }
-
-        .skew-box {
-            transform: skewX(-2deg);
-            background: #0f0f0f;
-            padding: 2rem;
-        }
-
-        /* ----- HEADER & NAV ----- */
-        header {
-            background: #000000;
-            border-bottom: 4px solid #ff3b00;
-            padding: 24px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 2.4rem;
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            color: #ffffff;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo span {
-            color: #ff3b00;
-            font-size: 2.8rem;
-        }
-
-        /* 네비게이션 (데스크탑) */
-        .nav-desktop {
-            display: flex;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .nav-desktop a {
-            font-family: system-ui, sans-serif;
-            font-weight: 700;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            padding: 8px 16px;
-            border: 2px solid transparent;
-            transition: border 0.2s ease, color 0.2s ease;
-        }
-
-        .nav-desktop a:hover {
-            border-bottom: 2px solid #ff3b00;
-            color: #ff3b00;
-        }
-
-        .nav-cta {
-            background: #ff3b00;
-            color: #000000 !important;
-            padding: 12px 24px !important;
-            border: none !important;
-            font-weight: 900;
-            transition: background 0.2s ease;
-        }
-        .nav-cta:hover {
-            background: #ffffff !important;
-            color: #000000 !important;
-        }
-
-        /* 햄버거 메뉴 (모바일) */
-        .nav-toggle {
-            display: none;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 8px 0;
-            background: none;
-            border: none;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 32px;
-            height: 4px;
-            background: #ffffff;
-            border-radius: 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-mobile {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #000000;
-            border-bottom: 4px solid #ff3b00;
-            padding: 24px 48px;
-            flex-direction: column;
-            gap: 24px;
-            z-index: 200;
-        }
-
-        .nav-mobile a {
-            font-family: system-ui, sans-serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            padding: 12px 0;
-            border-bottom: 2px solid #222;
-        }
-
-        .nav-mobile .nav-cta-mobile {
-            background: #ff3b00;
-            color: #000 !important;
-            text-align: center;
-            padding: 16px !important;
-            border: none !important;
-        }
-
-        /* 체크박스 기반 토글 */
-        #nav-toggle-input {
-            display: none;
-        }
-
-        #nav-toggle-input:checked ~ .nav-mobile {
-            display: flex;
-        }
-
-        #nav-toggle-input:checked + .hamburger span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-        #nav-toggle-input:checked + .hamburger span:nth-child(2) {
-            opacity: 0;
-        }
-        #nav-toggle-input:checked + .hamburger span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        /* ----- HERO ----- */
-        .hero {
-            padding: 120px 48px 72px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle at 30% 40%, #ff3b00 0%, transparent 70%);
-            opacity: 0.3;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 1000px;
-        }
-
-        .hero h1 {
-            font-size: clamp(4rem, 14vw, 9rem);
-            line-height: 0.9;
-            margin-bottom: 0.5rem;
-            text-shadow: 6px 6px 0 #ff3b00;
-        }
-
-        .hero .subhead {
-            font-size: 1.6rem;
-            font-family: system-ui, sans-serif;
-            font-weight: 300;
-            margin-bottom: 48px;
-            color: #cccccc;
-            max-width: 600px;
-            border-left: 6px solid #ff3b00;
-            padding-left: 24px;
-        }
-
-        .hero .cta-group {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background: #ff3b00;
-            color: #000000;
-            font-weight: 900;
-            font-size: 1.4rem;
-            padding: 16px 48px;
-            border: 4px solid #ffffff;
-            box-shadow: 6px 6px 0 #ffffff;
-            text-transform: uppercase;
-            transition: all 0.15s ease;
-            transform: rotate(-1deg);
-        }
-
-        .btn-primary:hover {
-            background: #ffffff;
-            color: #000000;
-            box-shadow: 6px 6px 0 #ff3b00;
-            transform: rotate(0deg);
-        }
-
-        .btn-ghost {
-            display: inline-block;
-            font-family: system-ui, sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
-            padding: 16px 32px;
-            border: 4px solid #ffffff;
-            color: #ffffff;
-            transition: all 0.15s ease;
-            text-transform: uppercase;
-        }
-
-        .btn-ghost:hover {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ff3b00;
-        }
-
-        /* ----- REVIEW CARDS (UGC) ----- */
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 48px;
-            margin-top: 24px;
-        }
-
-        .review-card {
-            background: #0f0f0f;
-            border: 4px solid #ffffff;
-            padding: 32px 24px;
-            transform: rotate(var(--rot, 0deg));
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 8px 8px 0 #ff3b00;
-        }
-
-        .review-card:hover {
-            transform: rotate(0deg) scale(1.02);
-            box-shadow: 12px 12px 0 #ffffff;
-        }
-
-        .review-card:nth-child(odd) {
-            --rot: -1.5deg;
-        }
-        .review-card:nth-child(even) {
-            --rot: 1.5deg;
-        }
-
-        .review-card .review-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            font-family: system-ui, sans-serif;
-            font-size: 0.9rem;
-            color: #aaaaaa;
-            border-bottom: 2px solid #333;
-            padding-bottom: 12px;
-        }
-
-        .review-card .review-name {
-            font-weight: 700;
-            color: #ffffff;
-            font-size: 1.1rem;
-        }
-
-        .review-card .review-date {
-            font-size: 0.85rem;
-        }
-
-        .review-card .review-stars {
-            color: #ff3b00;
-            font-size: 1.6rem;
-            letter-spacing: 4px;
-            margin-bottom: 12px;
-        }
-
-        .review-card .review-text {
-            font-family: system-ui, sans-serif;
-            font-size: 1.05rem;
-            line-height: 1.5;
-            color: #dddddd;
-        }
-
-        .review-card .review-text::before {
-            content: '“';
-            font-size: 2rem;
-            color: #ff3b00;
-            margin-right: 4px;
-        }
-        .review-card .review-text::after {
-            content: '”';
-            font-size: 2rem;
-            color: #ff3b00;
-            margin-left: 4px;
-        }
-
-        /* ----- SECTION DIVIDERS ----- */
-        .section-divider {
-            width: 100%;
-            height: 4px;
-            background: #ff3b00;
-            margin: 0;
-            border: none;
-            transform: skewY(-0.5deg);
-        }
-
-        /* ----- ASYMMETRIC BLOCKS & OVERLAPPING ----- */
-        .asymmetric-grid {
-            display: grid;
-            grid-template-columns: 2fr 1.2fr;
-            gap: 48px;
-            align-items: start;
-        }
-
-        .asymmetric-grid .block-left {
-            background: #0f0f0f;
-            padding: 64px 48px;
-            border: 4px solid #ff3b00;
-            transform: rotate(-0.5deg);
-            position: relative;
-            z-index: 2;
-        }
-
-        .asymmetric-grid .block-right {
-            background: #1a1a1a;
-            padding: 48px 40px;
-            border: 4px solid #ffffff;
-            transform: rotate(1.5deg) translateY(-40px);
-            position: relative;
-            z-index: 1;
-            box-shadow: -8px 8px 0 #ff3b00;
-        }
-
-        /* ----- FEATURE LIST (PBN 톤) ----- */
-        .feature-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            font-family: system-ui, sans-serif;
-            font-size: 1.2rem;
-        }
-
-        .feature-list li {
-            display: flex;
-            align-items: baseline;
-            gap: 12px;
-            border-bottom: 2px dashed #333;
-            padding-bottom: 12px;
-        }
-
-        .feature-list li::before {
-            content: '🔥';
-            font-size: 1.4rem;
-            color: #ff3b00;
-        }
-
-        /* ----- FOOTER ----- */
-        footer {
-            background: #000000;
-            border-top: 4px solid #ff3b00;
-            padding: 48px 48px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 48px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>공덕 가라오케 추천정보 | 공덕 노래방 추천 TOP5 &amp; 가격 비교 2025</title>
+<meta name="description" content="공덕 노래방 실제 방문 후기. 방 크기, 음향, 가격, 서비스 객관적 비교 분석.">
+<meta property="og:title" content="공덕 가라오케 추천정보 | 공덕 노래방 추천 TOP5 &amp; 가격 비교 2025">
+<meta property="og:description" content="공덕 노래방 실제 방문 후기. 방 크기, 음향, 가격, 서비스 객관적 비교 분석.">
+<meta name="robots" content="index,follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0c0f0a;color:#f0fdf4;font-family:'Noto Sans KR',sans-serif}
+.topbar{background:#16a34a;padding:8px 24px;text-align:center;font-size:13px;font-weight:600;color:#fff}
+nav{background:#0c0f0a;border-bottom:2px solid #16a34a;padding:20px 40px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:28px;font-weight:900;color:#f0fdf4;letter-spacing:-1px}
+.logo span{color:#16a34a}
+.nav-cats{display:flex;gap:24px;list-style:none}
+.nav-cats li a{color:#86efac;text-decoration:none;font-size:14px;font-weight:600;letter-spacing:0.3px}
+.nav-cats li a:hover{color:#16a34a}
+.featured{display:grid;grid-template-columns:2fr 1fr;gap:2px;margin:2px;height:480px}
+@media(max-width:768px){.featured{grid-template-columns:1fr;height:auto}}
+.feat-main{background:linear-gradient(180deg,transparent 40%,#0c0f0aee);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;background-color:#14532d}
+.feat-main::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#16a34a44,#14532d)}
+.feat-tag{background:#16a34a;color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:2px;display:inline-block;margin-bottom:12px;letter-spacing:1px;position:relative;z-index:1}
+.feat-main h2{font-size:clamp(22px,3vw,36px);font-weight:900;line-height:1.25;position:relative;z-index:1;margin-bottom:12px}
+.feat-main p{color:#86efac;font-size:15px;line-height:1.6;position:relative;z-index:1}
+.feat-side{display:flex;flex-direction:column;gap:2px}
+.feat-item{background:#14532d;padding:20px;flex:1;border-left:3px solid #16a34a;display:flex;flex-direction:column;justify-content:center}
+.feat-item .mini-tag{font-size:10px;color:#16a34a;font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.feat-item h3{font-size:16px;font-weight:700;line-height:1.35;margin-bottom:8px}
+.feat-item p{font-size:13px;color:#86efac;line-height:1.5}
+.section{max-width:1200px;margin:0 auto;padding:56px 24px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;padding-bottom:16px;border-bottom:2px solid #16a34a}
+.section-header h2{font-size:22px;font-weight:900}
+.section-header .count{font-size:14px;color:#86efac}
+.article-list{display:grid;gap:0}
+.article-row{display:grid;grid-template-columns:80px 1fr auto;gap:24px;padding:20px 0;border-bottom:1px solid #166534;align-items:start}
+.article-num{font-size:40px;font-weight:900;color:#16a34a;opacity:0.3;line-height:1}
+.article-content h3{font-size:17px;font-weight:700;margin-bottom:6px;line-height:1.35}
+.article-content p{font-size:14px;color:#86efac;line-height:1.6}
+.article-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.article-tags span{background:#14532d;border:1px solid #166534;color:#86efac;padding:3px 8px;border-radius:4px;font-size:11px}
+.article-aside{text-align:right;min-width:100px}
+.article-date{font-size:12px;color:#86efac88;display:block;margin-bottom:8px}
+.article-price{font-size:15px;font-weight:700;color:#16a34a;display:block}
+.cta-strip{background:linear-gradient(135deg,#16a34a,#4ade80);padding:60px 40px;text-align:center;margin:40px 0}
+.cta-strip h2{font-size:30px;font-weight:900;color:#fff;margin-bottom:12px}
+.cta-strip p{color:rgba(255,255,255,0.8);margin-bottom:28px;font-size:16px}
+.cta-strip .btn{background:#fff;color:#16a34a;padding:14px 36px;border-radius:4px;font-weight:800;text-decoration:none;font-size:15px;display:inline-block}
+footer{background:#14532d;border-top:2px solid #166534;padding:32px 40px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#86efac;flex-wrap:wrap;gap:16px}
+</style>
+</head>
+<body>
+<div class="topbar">🔥 2025년 공덕 가라오케 추천정보 최신 정보 업데이트 완료</div>
+<nav>
+  <div class="logo">공덕<span>가라오케 추천정보</span></div>
+  <ul class="nav-cats">
+    <li><a href="#">전체</a></li>
+    <li><a href="#">추천</a></li>
+    <li><a href="#">후기</a></li>
+    <li><a href="#">가격</a></li>
+  </ul>
+</nav>
+<div class="featured">
+  <div class="feat-main">
+    <span class="feat-tag">FEATURED</span>
+    <h2>공덕 노래방 추천 TOP5</h2>
+    <p>공덕 노래방 실제 방문 후기. 방 크기, 음향, 가격, 서비스 객관적 비교 분석....</p>
+  </div>
+  <div class="feat-side">
+    <div class="feat-item">
+      <div class="mini-tag">PICK</div>
+      <h3>공덕 파티룸 노래방</h3>
+      <p>...</p>
+    </div><div class="feat-item">
+      <div class="mini-tag">PICK</div>
+      <h3>럭셔리 노래클럽</h3>
+      <p>...</p>
+    </div><div class="feat-item">
+      <div class="mini-tag">PICK</div>
+      <h3>노래 천국 공덕</h3>
+      <p>...</p>
+    </div>
+  </div>
+</div>
+<section class="section">
+  <div class="section-header">
+    <h2>실방문 후기 기반 객관적 비교</h2>
+    <span class="count">5개 항목</span>
+  </div>
+  <div class="article-list">
+    <div class="article-row">
+      <div class="article-num">01</div>
+      <div class="article-content">
+        <h3>공덕 파티룸 노래방</h3>
+        <p></p>
+        <div class="article-tags">
+          <span>정보</span>
+          
+          
+        </div>
+      </div>
+      <div class="article-aside">
+        <span class="article-date">2025.05</span>
+        <span class="article-price">시간당 15,000원</span>
+      </div>
+    </div><div class="article-row">
+      <div class="article-num">02</div>
+      <div class="article-content">
+        <h3>럭셔리 노래클럽</h3>
+        <p></p>
+        <div class="article-tags">
+          <span>정보</span>
+          
+          
+        </div>
+      </div>
+      <div class="article-aside">
+        <span class="article-date">2025.05</span>
+        <span class="article-price">시간당 20,000원</span>
+      </div>
+    </div><div class="article-row">
+      <div class="article-num">03</div>
+      <div class="article-content">
+        <h3>노래 천국 공덕</h3>
+        <p></p>
+        <div class="article-tags">
+          <span>정보</span>
+          
+          
+        </div>
+      </div>
+      <div class="article-aside">
+        <span class="article-date">2025.05</span>
+        <span class="article-price">시간당 12,000원</span>
+      </div>
+    </div><div class="article-row">
+      <div class="article-num">04</div>
+      <div class="article-content">
+        <h3>스타 퍼포먼스</h3>
+        <p></p>
+        <div class="article-tags">
+          <span>정보</span>
+          
+          
+        </div>
+      </div>
+      <div class="article-aside">
+        <span class="article-date">2025.05</span>
+        <span class="article-price">시간당 18,000원</span>
+      </div>
+    </div><div class="article-row">
+      <div class="article-num">05</div>
+      <div class="article-content">
+        <h3>하모니 노래방</h3>
+        <p></p>
+        <div class="article-tags">
+          <span>정보</span>
+          
+          
+        </div>
+      </div>
+      <div class="article-aside">
+        <span class="article-date">2025.05</span>
+        <span class="article-price">시간당 10,000원</span>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="cta-strip">
+  <h2>예약 바로가기</h2>
+  <p>전문가와 1:1 무료 상담으로 최적의 선택을 하세요</p>
+  <a href="tel:010-0000-0000" class="btn">무료 상담 →</a>
+</div>
+<footer>
+  <span>© 2025 공덕 가라오케 추천정보</span>
+  <span>본 사이트의 정보는 참고용입니다.</span>
+</footer>
 </body>
 </html>
