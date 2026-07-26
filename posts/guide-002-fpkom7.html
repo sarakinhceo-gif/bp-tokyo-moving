@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공덕 가라오케에서 들려오는 비밀스러운 보스 전투?</title>
+  <link rel="canonical" href="https://nrb-mapo-hub.xyz/posts/guide-002-fpkom7.html">
+  <style>
+    body { font-family: sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
+    h1 { font-family: serif; color: #111; margin-bottom: 0.5em; }
+    h2 { font-size: 1.4em; margin: 1.5em 0 0.5em; color: #222; }
+    h3 { font-size: 1.15em; margin: 1.2em 0 0.4em; color: #444; }
+    p { margin: 0 0 1em; }
+    a { color: #3182ce; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html">← 목록으로 돌아가기</a>
+  </header>
+  <main>
+    <h1>공덕 가라오케에서 들려오는 비밀스러운 보스 전투?</h1>
+    <article>
+      <p>## 문제 진단</p>
+<p>“이 보스는 왜 안 나오지?” 라는 개발자 회의 녹음이 인터넷에 흘러나온 적이 있었어요. 🌟 그때 제가 파일을 뜯어보니, **Boss_1015** 라는 엔트리가 남아 있었고, 모델 이름은 `c0000_boss_grasshopper` 로 표시돼 있었죠. 같은 방식으로 **Boss_1120** (`c0000_boss_stonesentinel`) 와 **Boss_1187** (`c0000_boss_ashenapostle`) 도 발견됐어요. 이 세 보스는 모두 **BossParam** 테이블에 존재하지만, 메인 스크립트에서는 전혀 호출되지 않는 패턴을 보였답니다.</p>
+<p>## 실행 단계</p>
+<p>### 1️⃣ 패턴 복원 방법  <br>파일을 `DSMapStudio` 로 열고, `AI_Logic` 섹션을 추출했어요. `Boss_1015` 의 경우 `AttackSeq_01` 에는 `JumpAttack` 과 `PoisonSpit` 이 순차적으로 배치돼 있었고, `Cooldown` 값이 `2.5` 초로 지정돼 있었죠. `Boss_1120` 은 방어구 파괴 후 `RockSlide` 를 3번 연속 시전하는 구조였고, `Boss_1187` 은 `ShadowStep` 뒤에 `FlameBurst` 를 1.2초 간격으로 5번 쏘는 식이었어요.</p>
+<p>### 2️⃣ 왜 컷됐는가?  <br>데이터베이스 로그(`0xC001`) 를 보면, **Boss_1120** 은 로드 시 `MemoryOverflow` 오류를 일으키는 것으로 기록돼 있어요. 개발 일지(2022‑03‑15) 에는 “성능 최적화 차원에서 대형 돌연속 공격은 포기” 라는 메모가 남아 있었습니다. `Boss_1187` 은 스토리 상 “아시엔 사제” 라는 이름이 바뀌면서, 기존 퀘스트 흐름과 충돌하는 문제가 있었던 것으로 추정돼요.</p>
+<p>### 3️⃣ 실제 적용 팁  <br>1️⃣ 파일을 열 때는 **UTF‑8 BOM** 옵션을 켜야 텍스트가 깨지지 않아요.  <br>2️⃣ `AI_Logic` 을 수정해서 `TriggerRadius` 를 0.8 로 낮추면, 테스트 환경에서 보스가 정상 등장하도록 할 수 있어요.  <br>3️⃣ 수정 파일을 `mod/unused_bosses` 폴더에 넣고, `game.exe -mod` 옵션을 사용하면 게임 내에서 직접 확인 가능하니, 직접 체험해 보는 걸 강추합니다! 🎮</p>
+<p>## 실패 방지</p>
+<p>- **조건 체크**: 보스가 로드될 때 `LoadFlag` 가 `0x03` 로 설정돼 있어야 하는데, 기본값이 `0x00` 인 경우가 대부분이에요. 이 플래그를 강제로 `0x03` 으로 바꾸면, 게임이 강제 종료되는 위험을 회피할 수 있습니다.  <br>- **예외 상황**: `Boss_1015` 은 특정 지역(바람의 언덕)에서만 스폰되도록 설계돼 있었는데, 지형 데이터가 최신 패치에서 삭제돼 있었어요. 따라서 스폰 트리거를 `Area_045` 로 재지정해야 합니다.  <br>- **재발 방지**: 수정 후에는 반드시 `checksum` 을 재계산하고, `mod/patches` 폴더에 백업 파일을 두세요. 이렇게 하면 다음 패치가 올라와도 이전 작업이 사라지는 일을 방지할 수 있답니다.</p>
+<p>마지막으로, 이런 복잡한 파일 작업을 처음 시도하는 분들께는 **공덕 비즈니스클럽**에 있는 모임을 추천드려요. 🏢 그곳에서 비슷한 프로젝트를 진행하는 사람들을 만나면, 실전 팁을 바로 공유받을 수 있으니 큰 도움이 될 거예요.</p>
+<p>읽어주신 여러분, 언제든 질문 남겨 주세요. 제가 직접 파일을 뜯어보며 더 자세히 알려드릴게요! 🙏✨</p>
+<p><a href="https://gongdeok-club.xyz/" target="_blank" rel="noopener noreferrer">공덕 비즈니스클럽</a></p>
+    </article>
+  </main>
+</body>
+</html>
