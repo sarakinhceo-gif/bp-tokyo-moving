@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공덕 가라오케에서 들려오는 비밀스러운 보스 전투?</title>
+  <title>공덕 가라오케 방문 전 확인해야 할 소음 차단 실무</title>
   <link rel="canonical" href="https://nrb-mapo-hub.xyz/posts/guide-002-fpkom7.html">
   <style>
     body { font-family: sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
@@ -15,7 +15,7 @@
     a:hover { text-decoration: underline; }
   </style>
   <meta property="og:url" content="https://nrb-mapo-hub.xyz/posts/guide-002-fpkom7.html">
-  <meta property="og:title" content="공덕 가라오케에서 들려오는 비밀스러운 보스 전투?">
+  <meta property="og:title" content="공덕 가라오케 방문 전 확인해야 할 소음 차단 실무">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
 </head>
@@ -24,20 +24,19 @@
     <a href="../index.html">← 목록으로 돌아가기</a>
   </header>
   <main>
-    <h1>공덕 가라오케에서 들려오는 비밀스러운 보스 전투?</h1>
-    <article>
-      <h2>문제 진단</h2>
-<p>“이 보스는 왜 안 나오지?” 라는 개발자 회의 녹음이 인터넷에 흘러나온 적이 있었어요. 🌟 그때 제가 파일을 뜯어보니, <strong>Boss_1015</strong> 라는 엔트리가 남아 있었고, 모델 이름은 <code>c0000_boss_grasshopper</code> 로 표시돼 있었죠. 같은 방식으로 <strong>Boss_1120</strong> (<code>c0000_boss_stonesentinel</code>) 와 <strong>Boss_1187</strong> (<code>c0000_boss_ashenapostle</code>) 도 발견됐어요. 이 세 보스는 모두 <strong>BossParam</strong> 테이블에 존재하지만, 메인 스크립트에서는 전혀 호출되지 않는 패턴을 보였답니다.</p>
-<h2>실행 단계</h2>
-<h3>1️⃣ 패턴 복원 방법  <br>파일을 <code>DSMapStudio</code> 로 열고, <code>AI_Logic</code> 섹션을 추출했어요. <code>Boss_1015</code> 의 경우 <code>AttackSeq_01</code> 에는 <code>JumpAttack</code> 과 <code>PoisonSpit</code> 이 순차적으로 배치돼 있었고, <code>Cooldown</code> 값이 <code>2.5</code> 초로 지정돼 있었죠. <code>Boss_1120</code> 은 방어구 파괴 후 <code>RockSlide</code> 를 3번 연속 시전하는 구조였고, <code>Boss_1187</code> 은 <code>ShadowStep</code> 뒤에 <code>FlameBurst</code> 를 1.2초 간격으로 5번 쏘는 식이었어요.</h3>
-<h3>2️⃣ 왜 컷됐는가?  <br>데이터베이스 로그(<code>0xC001</code>) 를 보면, <strong>Boss_1120</strong> 은 로드 시 <code>MemoryOverflow</code> 오류를 일으키는 것으로 기록돼 있어요. 개발 일지(2022‑03‑15) 에는 “성능 최적화 차원에서 대형 돌연속 공격은 포기” 라는 메모가 남아 있었습니다. <code>Boss_1187</code> 은 스토리 상 “아시엔 사제” 라는 이름이 바뀌면서, 기존 퀘스트 흐름과 충돌하는 문제가 있었던 것으로 추정돼요.</h3>
-<h3>3️⃣ 실제 적용 팁  <br>1️⃣ 파일을 열 때는 <strong>UTF‑8 BOM</strong> 옵션을 켜야 텍스트가 깨지지 않아요.  <br>2️⃣ <code>AI_Logic</code> 을 수정해서 <code>TriggerRadius</code> 를 0.8 로 낮추면, 테스트 환경에서 보스가 정상 등장하도록 할 수 있어요.  <br>3️⃣ 수정 파일을 <code>mod/unused_bosses</code> 폴더에 넣고, <code>game.exe -mod</code> 옵션을 사용하면 게임 내에서 직접 확인 가능하니, 직접 체험해 보는 걸 강추합니다! 🎮</h3>
-<h2>실패 방지</h2>
-<p>- <strong>조건 체크</strong>: 보스가 로드될 때 <code>LoadFlag</code> 가 <code>0x03</code> 로 설정돼 있어야 하는데, 기본값이 <code>0x00</code> 인 경우가 대부분이에요. 이 플래그를 강제로 <code>0x03</code> 으로 바꾸면, 게임이 강제 종료되는 위험을 회피할 수 있습니다.  <br>- <strong>예외 상황</strong>: <code>Boss_1015</code> 은 특정 지역(바람의 언덕)에서만 스폰되도록 설계돼 있었는데, 지형 데이터가 최신 패치에서 삭제돼 있었어요. 따라서 스폰 트리거를 <code>Area_045</code> 로 재지정해야 합니다.  <br>- <strong>재발 방지</strong>: 수정 후에는 반드시 <code>checksum</code> 을 재계산하고, <code>mod/patches</code> 폴더에 백업 파일을 두세요. 이렇게 하면 다음 패치가 올라와도 이전 작업이 사라지는 일을 방지할 수 있답니다.</p>
-<p>마지막으로, 이런 복잡한 파일 작업을 처음 시도하는 분들께는 <strong>공덕 비즈니스클럽</strong>에 있는 모임을 추천드려요. 🏢 그곳에서 비슷한 프로젝트를 진행하는 사람들을 만나면, 실전 팁을 바로 공유받을 수 있으니 큰 도움이 될 거예요.</p>
-<p>읽어주신 여러분, 언제든 질문 남겨 주세요. 제가 직접 파일을 뜯어보며 더 자세히 알려드릴게요! 🙏✨</p>
-<p><a href="https://gongdeok-club.xyz/" target="_blank" rel="noopener noreferrer">공덕 비즈니스클럽</a></p>
-    </article>
-  </main>
+      <h1>공덕 가라오케 방문 전 확인해야 할 소음 차단 실무</h1>
+      <div class="content">
+        <p>공덕 지역 가라오케를 찾을 때 시설 수준이나 안주 가짓수에만 집중하는 경우가 많다. 잘 몰라서 그런데 다들 노래방 시스템이 거기서 거기라고 생각하는지 모르겠다. 막상 들어가서 옆방 소음이 섞여 들리거나 방음이 안 돼서 옆방에 노래가 다 들리는 상황이 발생하면 분위기는 순식간에 망가진다. 기기 성능보다 방음 설계가 먼저다. 문틈에 고무 패킹이 제대로 붙어 있는지 혹은 방 내부가 흡음재로 충분히 보강되어 있는지 확인하는 게 우선이다.</p>
+        <p>방음 상태를 직접 체크하는 방법은 의외로 간단하다. 입장하자마자 반주기를 끄고 정적을 유지해 보면 된다. 밖에서 나는 복도 소음이 과하게 들어온다면 그곳은 구조적으로 방음이 취약하다는 증거다. 이런 곳은 아무리 고급 마이크를 써도 소리가 울리거나 옆방 저음이 타고 들어와서 만족도가 떨어진다. 공덕 일대에서 나름 괜찮은 곳을 찾는다면 입구에서부터 방음벽이 두터운지 살짝 두드려보고 들어가는 것도 방법이다.</p>
+        <p>공간 선택의 효율성을 따진다면 인원수에 딱 맞는 방을 고집할 필요가 없다. 좁은 방에 빽빽하게 앉으면 소리가 난반사되어 가뜩이나 음질이 좋지 않은 환경에서 더 피로해진다. 차라리 여유로운 방을 선택해 공간의 쾌적함을 확보하는 게 노래할 맛이 난다. 인원 대비 한두 단계 큰 방을 요청하는 것이 전체적인 이용 경험을 결정짓는 핵심이다. 몇 천 원 더 쓰더라도 귀가 피로하지 않은 환경을 사는 게 훨씬 남는 장사다.</p>
+        <p>마지막으로 예약할 때 층수를 따져보는 것도 요령이다. 지하보다는 지상층에 위치한 가라오케가 환기 측면에서 유리하다. 공덕 주변 상가 구조상 지하 매장이 많은데, 지하는 특유의 습한 냄새가 밴 곳이 의외로 많다. 쾌적한 환경에서 온전히 시간을 즐기고 싶다면 지상층을 우선순위에 두길 바란다. 굳이 돈 써가며 불쾌한 냄새 속에서 노래 부를 이유는 없다. 이 정도만 확인해도 실패 확률은 확실히 줄어든다.</p>
+        <p><a href="https://gongdeok-club.xyz/" target="_blank" rel="noopener noreferrer">공덕 비즈니스클럽</a></p>
+      </div>
+        <nav class="post-pager" aria-label="글 이동">
+      <a class="post-pager__prev" href="../posts/guide-002-b909gg.html">← 공덕 가라오케 방문 시 고려해야 할 주차와 위치 선정 전략</a>
+      <a class="post-pager__index" href="../posts.html">글 목록</a>
+      <a class="post-pager__next" href="../posts/guide-002-mtheza.html">공덕역 가라오케 골라야 하는 이유 →</a>
+    </nav>
+    </main>
 </body>
 </html>
